@@ -8,6 +8,7 @@
     "@types/node": "^20.10.6"
   },
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "test:browser": "yarn playwright show-report"
   }
 }
