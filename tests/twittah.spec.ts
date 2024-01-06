@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../login-page";
-import { validUser } from "../fixtures/credential";
+import { LoginPage } from "../pom/login.page";
+import { validUser } from "../fixtures/user";
 
 test("Visit Twittah!", async ({ page }) => {
   await page.goto("https://twittah.web.app");
@@ -13,7 +13,7 @@ test("User post successfully", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.visit();
-  await loginPage.loginWithCredential(validUser);
+  await loginPage.loginWith(validUser);
   await loginPage.postWithContent("hello!");
   await loginPage.logout();
 });

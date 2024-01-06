@@ -15,15 +15,11 @@ export class LoginPage {
     await expect(this.page.getByTestId("login-button")).toBeVisible();
   }
 
-  async loginWithCredential(credential: {
-    username: string;
-    password: string;
-  }) {
+  async loginWith(credential: { username: string; password: string }) {
+    await expect(this.page.getByTestId("login-button")).toBeVisible();
     await this.page.getByTestId("login-field").fill(credential.username);
     await this.page.getByTestId("password-field").fill(credential.password);
-    await this.page.getByTestId("login-button").click();
-    await expect(this.page.getByTestId("message-field")).toBeVisible();
-    await expect(this.page.getByTestId("post-button")).toBeVisible();
+    await this.page.getByTestId("login-button").click({ delay: 300 });
   }
 
   async postWithContent(message: string) {
@@ -36,5 +32,9 @@ export class LoginPage {
     await this.page.getByTestId("menu-signout").click();
     await expect(this.page.getByTestId("app-name")).toBeVisible();
     await expect(this.page.getByTestId("app-name")).toHaveText("Twittah!");
+  }
+
+  async shouldContainErrorMessage(errMsg: string) {
+    await expect(this.page.getByTestId("error-message")).toHaveText(errMsg);
   }
 }
